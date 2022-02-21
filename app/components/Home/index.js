@@ -1,36 +1,47 @@
-import React from 'react'
-import { Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import React from 'react';
+import NavHeaderImage from '../../../images/mobile_header_logo_wfl.png';
+import { Text, View, StyleSheet, TouchableWithoutFeedback, Dimensions, ImageBackground } from 'react-native';
+
 export default ViewHeader = (props) => {
     const isEnabledBackbutton = props.showBackButton;
     const isEnabledMorebutton = props.showMoreButton;
+    const isShowOnlyImage = props.showOnlyImage;
+    const screen = Dimensions.get("screen");
     return (
-        <View style={styles.container}>
-            <TouchableWithoutFeedback onPress={props.handleBackButtonClick}
-                disabled={(isEnabledBackbutton == "true") ? false : true}>
-                <View style={styles.subView} opacity={(isEnabledBackbutton == "true") ? 1 : 0}>
-                    <Text style={styles.backButton}>Back</Text>
+        <View style={styles.parentView}>
+            <ImageBackground source={NavHeaderImage} resizeMode="center" style={{ width: screen.width, height: 44, position: 'absolute' }} opacity={(isShowOnlyImage == "true") ? 1 : 0} />
+            <View style={styles.container} opacity={(isShowOnlyImage == "false") ? 1 : 0}>
+                <TouchableWithoutFeedback onPress={props.handleBackButtonClick}
+                    disabled={(isEnabledBackbutton == "true") ? false : true}>
+                    <View style={styles.subView} opacity={(isEnabledBackbutton == "true") ? 1 : 0}>
+                        <Text style={styles.backButton}>Back</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                <View style={styles.headerView}>
+                    <Text style={styles.title}>{props.projectName}</Text>
                 </View>
-            </TouchableWithoutFeedback>
-            <View style={styles.headerView}>
-                <Text style={styles.title}>{props.projectName}</Text>
+                <TouchableWithoutFeedback onPress={props.handleMoreButtonClick}
+                    disabled={(isEnabledMorebutton == "true") ? false : true}>
+                    <View style={styles.subView} opacity={(isEnabledMorebutton == "true") ? 1 : 0}>
+                        <Text style={styles.moreButton}>More</Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
-            <TouchableWithoutFeedback onPress={props.handleMoreButtonClick}
-                disabled={(isEnabledMorebutton == "true") ? false : true}>
-                <View style={styles.subView} opacity={(isEnabledMorebutton == "true") ? 1 : 0}>
-                    <Text style={styles.moreButton}>More</Text>
-                </View>
-            </TouchableWithoutFeedback>
-        </View>
+        </View >
     )
 }
 const styles = StyleSheet.create({
+    parentView: {
+        height: 44,
+        width: "100%"
+    },
     container: {
         height: 44,
         width: "100%",
         backgroundColor: "gray",
         flexDirection: 'row',
-        justifyContent: 'space-between'
-
+        justifyContent: 'space-between',
+        position: 'absolute'
     },
     subView: {
         flex: 1,

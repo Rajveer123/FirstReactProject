@@ -12,12 +12,15 @@ import {
   View,
   SafeAreaView,
   ScrollView,
+  ImageBackground,
+  Dimensions,
   Image,
   Text,
   TextInput,
   TouchableHighlight
 } from 'react-native';
 import LauncherImage from './images/ic_launcher.png';
+import MainBackgroundImage from './images/login_background.jpg';
 import ViewHeader from './app/components/Home/index.js';
 import clearButtonImage from './images/icon_clear_field_big.png';
 
@@ -44,14 +47,22 @@ const styles = StyleSheet.create({
     marginTop: 40,
     borderBottomColor: 'red',
     borderBottomWidth: StyleSheet.hairlineWidth
+  },
+  mainView: {
+    flex: 1,
+    backgroundColor: 'yellow'
   }
+  // bgImage: {
+  //   width: 100,
+  //   height: 100,
+  //   flex: 1
+  // }
 });
 
 const App = () => {
 
   const [text, setText] = useState('Initial Text');
-
-
+  const screen = Dimensions.get("screen");
   state = {
     textValue: "hi this is default text"
   };
@@ -75,8 +86,14 @@ const App = () => {
         handleBackButtonClick={this.handleBackButtonClick}
         handleMoreButtonClick={this.handleMoreButtonClick}
         showBackButton="false"
-        showMoreButton="false" />
-      <ScrollView
+        showMoreButton="false"
+        showOnlyImage="true" />
+
+
+      <View style={styles.mainView}>
+        <ImageBackground source={MainBackgroundImage} resizeMode="cover" style={{ width: screen.width, height: screen.height }} />
+      </View>
+      {/* <ScrollView
         contentInsetAdjustmentBehavior='automatic'>
         <View style={{ justifyContent: 'center', marginTop: 20, alignItems: 'center' }}>
           <Text style={{ fontSize: 18, margin: 10 }}>Header Title</Text>
@@ -128,10 +145,10 @@ const App = () => {
             style={{ width: 50, height: 50 }}
             source={LauncherImage}
           />
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={LauncherImage}
-          />
+          // <Image
+          //   style={{ width: 50, height: 50 }}
+          //   source={LauncherImage}
+          // />
         </View>
 
 
@@ -150,7 +167,7 @@ const App = () => {
               style={{ width: 30, height: 30, alignItems: 'center', justifyContent: 'center', marginTop: 5 }} />
           </TouchableHighlight>
         </View>
-      </ScrollView>
+      </ScrollView> */}
     </SafeAreaView >
 
   );
